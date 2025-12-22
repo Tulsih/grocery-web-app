@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreshMart Grocery</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>🛒 FreshMart</h1>
+            </div>
+            <div class="nav-links">
+                <% if (typeof userName !== 'undefined') { %>
+                    <span class="user-name">Hello, <%= userName %></span>
+                    <a href="/products" class="nav-link">Products</a>
+                    <a href="/cart" class="nav-link cart-link">
+                        Cart <span class="cart-badge" id="cartBadge"><%= typeof cartItemCount !== 'undefined' ? cartItemCount : 0 %></span>
+                    </a>
+                    <a href="/auth/logout" class="nav-link logout">Logout</a>
+                <% } %>
+            </div>
+        </div>
+    </nav>

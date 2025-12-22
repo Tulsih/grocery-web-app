@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+
+<main class="main-content">
+    <div class="container">
+        <div class="page-header">
+            <h2>Browse Products</h2>
+        </div>
+
+        <div class="filters">
+            <div class="search-box">
+                <form action="/products" method="GET" class="search-form">
+                    <input type="text" name="search" placeholder="Search products..." value="<%= searchQuery %>">
+                    <button type="submit" class="btn btn-secondary">Search</button>
+                </form>
+            </div>
+            
+            <div class="category-filters">
+                <a href="/products" class="filter-btn <%= selectedCategory === 'All' ? 'active' : '' %>">All</a>
+                <% categories.forEach(category => { %>
+                    <a href="/products?category=<%= category %>" class="filter-btn <%= selectedCategory === category ? 'active' : '' %>"><%= category %></a>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="products-grid">
+            <% if (products.length === 0) { %>
+                <div class="no-products">
+                    <p>No products found. <a href="/products/seed">Click here</a> to seed sample products.</p>
+                </div>
+            <% } else { %>
+                <% products.forEach(product => { %>
+                    <div class="product-card">
+                        <img src="<%= product.image %>" alt="<%= product.name %>">
+                        <div class="product-info">
+                            <h3><%= product.name %></h3>
+                            <p class="product-category"><%= product.category %></p>
+                            <p class="product-price">₹<%= product.price.toFixed(2) %> / <%= product.unit %></p>
+                            <button class="btn btn-primary btn-block add-to-cart" data-product-id="<%= product._id %>">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } %>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>
